@@ -6,9 +6,9 @@ const Navbar = () => {
     return (
         <div className='container mx-auto my-5 px-5 xl:px-0 flex justify-between items-center'>
             <div>
-                <h2 className='font-inter text-xl md:text-2xl font-bold'>Shohayok</h2>
+                <h2 className='font-inter text-xl text-violet-600 md:text-2xl font-bold'>Shohayok</h2>
             </div>
-            <p className='font-inter text-[14px] md:text-[17px] font-medium flex items-start gap-1'><FaCalendarDays className='text-[22px] hidden md:block'/> Upcoming Events</p>
+            <p className='font-inter text-[14px] hover:text-violet-600 cursor-pointer md:text-[17px] font-medium flex items-start gap-1'><FaCalendarDays className='text-[22px] hidden md:block'/> Upcoming Events</p>
             <NavButton />
         </div>
     );

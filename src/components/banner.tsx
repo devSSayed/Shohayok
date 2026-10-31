@@ -33,7 +33,7 @@ const Banner = () => {
                     </Button>
                     <Button
                         variant='outline'
-                        className='border-white/60 bg-transparent py-6 px-5 text-white font-inter font-medium text-[15px] hover:bg-white/10 active:bg-white/30   hover:text-white cursor-pointer'
+                        className='border-white/60 bg-transparent py-6 px-5 text-white font-inter font-medium text-[15px] hover:bg-white/10 active:bg-white/30 hover:text-white cursor-pointer'
                     >
                         Add Event
                     </Button>
