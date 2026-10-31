@@ -37,15 +37,15 @@ const features = [
 
 const PlatformHighlights = () => {
     return (
-        <section className='bg-gradient-to-b from-muted/60 via-background to-muted/40 px-5 py-16 sm:py-20'>
+        <section className='px-5 py-16 sm:py-20'>
             <div className='mx-auto max-w-6xl text-center'>
-                <p className='text-xs font-semibold uppercase tracking-[0.2em] text-teal-600'>
+                <p className='text-xs font-semibold uppercase tracking-[0.2em] text-teal-600 font-inter'>
                     Platform Highlights
                 </p>
                 <h2 className='mt-3 text-2xl sm:text-3xl lg:text-4xl font-inter font-bold'>
                     Built for Real-Time Community Action
                 </h2>
-                <p className='mx-auto mt-4 max-w-2xl text-sm sm:text-base text-muted-foreground'>
+                <p className='mx-auto mt-4 max-w-2xl text-sm sm:text-base text-muted-foreground font-inter '>
                     Stay connected, discover active drives, and launch local
                     initiatives effortlessly.
                 </p>

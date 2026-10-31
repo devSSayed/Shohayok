@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 const Banner = () => {
     return (
-        <div className='relative w-full h-[calc(100vh-90px)] min-h-[420px] overflow-hidden'>
+        <div className='relative w-full h-[calc(100vh-90px)] min-h-105 overflow-hidden'>
             <Image
                 src={img1}
                 alt='banner image'
@@ -13,7 +13,7 @@ const Banner = () => {
                 className='object-cover'
                 priority
             />
-            {/* dark shade so the text is clear to read */}
+            {/* Dark shade so the text is clear to read */}
             <div className='absolute inset-0 bg-black/40' />
 
             {/* content: bottom left */}

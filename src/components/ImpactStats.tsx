@@ -7,7 +7,7 @@ const stats = [
 
 const ImpactStats = () => {
     return (
-        <section className='bg-muted/40 px-5 py-14 sm:py-16'>
+        <section className='px-5 py-14 sm:py-16'>
             <div className='mx-auto max-w-5xl text-center'>
                 <h2 className='text-2xl sm:text-3xl font-inter font-bold'>
                     Our Impact in Numbers
