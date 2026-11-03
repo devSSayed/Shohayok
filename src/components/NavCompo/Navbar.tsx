@@ -1,28 +1,31 @@
-import React from 'react';
+import navLogo from '@/assets/logo.svg';
 import NavButton from './NavButton';
-import { FaCalendarDays } from 'react-icons/fa6';
 import Link from 'next/link';
-import { Heart } from 'lucide-react';
+import Image from 'next/image';
 
 const Navbar = () => {
     return (
-        <div className='container mx-auto max-w-6xl my-5 px-2 md:px-5 xl:px-0 flex justify-between items-center '>
-            <div>
-                <Link href={'/'}> 
-                <div className="flex items-center gap-1">
-                    {/* Brand Logo Icon */}
-                    <div className="p-2 rounded-xl bg-primary text-primary-foreground shadow-sm">
-                        <Heart className="w-5   h-5 fill-current" />
-                    </div>
-                    <span className="text-xl md:text-2xl font-bold font-inter tracking-tight">
-                        Shohayok
-                    </span>
+        <header className='absolute top-0 left-0 right-0 z-20 w-full py-6 px-4 md:px-8'>
+            <div className='container mx-auto flex justify-between items-center'>
+                {/* Logo */}
+                <div>
+                    <Link href={'/'}>
+                        <Image src={navLogo} alt='Logo' className='w-28 md:w-44' />
+                    </Link>
                 </div>
-                </Link>
+
+                {/* Right Links & Button */}
+                <div className='flex items-center gap-6'>
+                    <Link
+                        href='/events'
+                        className='font-inter text-[14px] md:text-[16px] font-medium text-[#F6FFDF] hover:underline transition-colors flex items-center gap-2 cursor-pointer'
+                    >
+                        Upcoming Events
+                    </Link>
+                    <NavButton />
+                </div>
             </div>
-            <p className='font-inter text-[14px] hover:text-violet-600 cursor-pointer md:text-[17px] font-medium flex items-start gap-1'><FaCalendarDays className='text-[22px] hidden md:block' /> Upcoming Events</p>
-            <NavButton />
-        </div>
+        </header>
     );
 };
 

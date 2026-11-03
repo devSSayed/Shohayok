@@ -1,6 +1,7 @@
+import navLogo from '@/assets/logo.svg';
+import Image from 'next/image';
 import Link from 'next/link';
 import {
-    Heart,
     MapPin,
     Compass,
     PlusCircle,
@@ -11,72 +12,64 @@ import {
 
 const Footer = () => {
     return (
-        <footer className="border-t border-border/60 bg-background pt-14 pb-8 text-foreground font-inter">
+        <footer className="border-t border-border/60 bg-[#003006] pt-14 pb-8 text-foreground font-inter">
             <div className="container mx-auto max-w-6xl px-5 xl:px-0">
                 {/* Main 4-Column Grid */}
                 <div className="grid grid-cols-1 align-middle items-center md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12">
 
                     {/* Column 1: Brand & Tagline (4 cols) */}
                     <div className="lg:col-span-4 space-y-4">
-                        <div className="flex items-center gap-2">
-                            {/* Brand Logo Icon */}
-                            <div className="p-2 rounded-xl bg-primary text-primary-foreground shadow-sm">
-                                <Heart className="w-5 h-5 fill-current" />
-                            </div>
-                            <span className="text-xl font-bold font-inter tracking-tight">
-                                Shohayok
-                            </span>
-                        </div>
+                       <Image src={navLogo} alt="Shohayok Logo" className="w-32 " />
 
-                        <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+                        <p className="text-sm text-[#F6FFDF]/80 leading-relaxed max-w-xs">
                             A community-driven platform empowering citizens across Bangladesh to create, discover, and join local social development initiatives.
                         </p>
 
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground pt-1">
-                            <MapPin className="w-4 h-4 text-primary shrink-0" />
+                        <div className="flex items-center gap-2 text-xs text-[#F6FFDF]/80 pt-1">
+                            <MapPin className="w-4 h-4 text-[#F6FFDF] shrink-0" />
                             <span>Dhaka, Bangladesh · Nationwide Reach</span>
                         </div>
                     </div>
 
                     {/* Column 2: Navigation Links (2 cols) */}
                     <div className="lg:col-span-3 space-y-3">
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/80">
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-[#F6FFDF]/80">
                             Navigation
                         </h4>
                         <ul className="space-y-2.5 text-sm font-medium">
                             <li>
                                 <Link
                                     href="/events"
-                                    className="hover:text-primary transition-colors flex items-center gap-2"
+                                    className="text-[#F6FFDF] hover:text-[#00C979] transition-colors flex items-center gap-2"
                                 >
-                                    <Compass className="w-4 h-4 text-muted-foreground" />
+                                    <Compass className="w-4 h-4 text-[#F6FFDF]/80" />
                                     Explore Upcoming Events
                                 </Link>
                             </li>
                             <li>
                                 <Link
                                     href="/create"
-                                    className="hover:text-primary transition-colors flex items-center gap-2"
+                                    className="text-[#F6FFDF] hover:text-[#00C979]  transition-colors flex items-center gap-2"
                                 >
-                                    <PlusCircle className="w-4 h-4 text-muted-foreground" />
+                                    <PlusCircle className="w-4 h-4 text-[#F6FFDF]/80" />
                                     Host an Event
                                 </Link>
                             </li>
                             <li>
                                 <Link
                                     href="/my-events"
-                                    className="hover:text-primary transition-colors flex items-center gap-2"
+                                    className="text-[#F6FFDF] hover:text-[#00C979]  transition-colors flex items-center gap-2"
                                 >
-                                    <Calendar className="w-4 h-4 text-muted-foreground" />
+                                    <Calendar className="w-4 h-4 text-[#F6FFDF]/80" />
                                     My Events
                                 </Link>
                             </li>
                             <li>
                                 <Link
                                     href="/joined"
-                                    className="hover:text-primary transition-colors flex items-center gap-2"
+                                    className="text-[#F6FFDF] hover:text-[#00C979]  transition-colors flex items-center gap-2"
                                 >
-                                    <UserCheck className="w-4 h-4 text-muted-foreground" />
+                                    <UserCheck className="w-4 h-4 text-[#F6FFDF]/80" />
                                     Joined Events
                                 </Link>
                             </li>
@@ -85,28 +78,28 @@ const Footer = () => {
 
                     {/* Column 3: Platform Drives (3 cols) */}
                     <div className="lg:col-span-3 space-y-3">
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/80">
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-[#F6FFDF]/80">
                             Platform Drives
                         </h4>
                         <ul className="space-y-2 text-sm text-muted-foreground">
-                            <li className="flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                            <li className="flex items-center gap-2 text-[#F6FFDF]">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#00C979]" />
                                 Winter & Clothing Relief
                             </li>
-                            <li className="flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                            <li className="flex items-center gap-2 text-[#F6FFDF]">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#00C979]" />
                                 Food Security & Meal Sharing
                             </li>
-                            <li className="flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                            <li className="flex items-center gap-2 text-[#F6FFDF]   ">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#00C979]" />
                                 Clean City & Recycling Drives
                             </li>
-                            <li className="flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />
+                            <li className="flex items-center gap-2 text-[#F6FFDF]">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#00C979]" />
                                 Tree Plantation & Ecology
                             </li>
-                            <li className="flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                            <li className="flex items-center gap-2 text-[#F6FFDF]   ">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#00C979]" />
                                 Emergency Relief & Aid
                             </li>
                         </ul>
@@ -114,13 +107,13 @@ const Footer = () => {
 
                     {/* Column 4: Mission Badge (2 cols) */}
                     <div className="lg:col-span-2 space-y-3">
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/80">
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-[#F6FFDF]/80">
                             Our Commitment
                         </h4>
-                        <p className="text-xs text-muted-foreground leading-relaxed">
+                        <p className="text-xs text-[#F6FFDF] leading-relaxed">
                             Connecting compassionate individuals directly with authentic local needs.
                         </p>
-                        <div className="inline-flex items-center whitespace-nowrap gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
+                        <div className="inline-flex items-center whitespace-nowrap gap-1.5 px-3 py-1.5 rounded-full bg-[#00C979]/10 border border-[#00C979]/20 text-[#00C979] text-xs font-semibold">
                             <Sparkles className="w-3.5 h-3.5" />
                             100% Grassroots
                         </div>
@@ -129,14 +122,14 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Bar Separator */}
-                <div className="border-t border-border/40 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+                <div className="border-t border-border/40 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#F6FFDF]/80">
                     <p>© 2026 Shohayok. Built for community action and social impact.</p>
                     <div className="flex items-center gap-4">
-                        <Link href="#" className="hover:text-foreground transition-colors">
+                        <Link href="#" className="hover:text-[#00C979] transition-colors">
                             Privacy Policy
                         </Link>
                         <span>·</span>
-                        <Link href="#" className="hover:text-foreground transition-colors">
+                        <Link href="#" className="hover:text-[#00C979] transition-colors">
                             Terms of Action
                         </Link>
                     </div>
