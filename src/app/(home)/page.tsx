@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div>
       <main className="relative w-full min-h-screen">
-        <Navbar />
+         <Navbar variant="transparent"/>
         <Banner />
       </main>
       

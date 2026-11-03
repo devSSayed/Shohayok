@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Hanken_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/NavCompo/Navbar";
-import Footer from "@/components/Footer";
 
 
 const hanken_Grotesk = Hanken_Grotesk({
@@ -24,14 +22,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${hanken_Grotesk.variable} ${inter.variable} h-full antialiased`}
+      className={`${hanken_Grotesk.variable} ${inter.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <Navbar />
-        
-        
-        {children}
-        <Footer />
+      <body className="min-h-screen flex flex-col bg-[#F6FFDF] ">        
+        <main className="flex-1">
+          {children}
+        </main>
         </body>
     </html>
   );

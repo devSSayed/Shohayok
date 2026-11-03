@@ -34,12 +34,12 @@ const features = [
 const PlatformHighlights = () => {
     return (
         <section className='px-5 py-16 sm:py-20 bg-[#F6FFDF]'>
-            <div className='mx-auto max-w-6xl text-center flex flex-col items-center justify-center gap-3 sm:gap-6'>
+            <div className='mx-auto max-w-6xl text-center flex flex-col items-center justify-center gap-3 xl:gap-6'>
                 <p className='text-xs font-semibold uppercase tracking-[0.2em] border-2 border-[#00C979] py-1.5 px-2.5 rounded-[10px] text-[#003006] font-inter'>
                     Platform Highlights
                 </p>
                 <div className='space-y-3'>
-                    <h2 className='mt-3 text-2xl sm:text-3xl lg:text-4xl font-inter font-bold text-[#003006]'>
+                    <h2 className='mt-3 text-3xl lg:text-4xl font-inter font-bold text-[#003006]'>
                         Built for Real-Time Community Action
                     </h2>
                     <p className='mx-auto mt-4 max-w-2xl text-sm sm:text-[17px] text-muted-foreground font-inter '>
