@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Hanken_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 
 const hanken_Grotesk = Hanken_Grotesk({
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex-1">
           {children}
         </main>
+        <Toaster position='top-center' />
         </body>
     </html>
   );

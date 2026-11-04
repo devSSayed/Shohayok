@@ -33,7 +33,7 @@ const Banner = () => {
                     <div className='flex flex-wrap items-center gap-3 mt-3'>
                         {/* Primary Button */}
                         <Button
-                            className='bg-[#00C979] hover:bg-[#00C979]/60 active:bg-[#00C979]/80 font-semibold font-inter text-[16px] text-[#003006] px-6 py-6 rounded-[10px] cursor-pointer transition-all shadow-lg border-none'
+                            className='bg-[#00C979] hover:bg-[#00C979]/60 active:bg-[#00C979]/80 font-semibold font-inter text-[16px] text-[#003006] hover:text-[#F6FFDF] active:text-[#F6FFDF] px-6 py-6 rounded-[10px] cursor-pointer transition-all shadow-lg border-none'
                         >
                             Explore upcoming Events
                         </Button>
@@ -41,7 +41,7 @@ const Banner = () => {
                         {/* Secondary Outline Button */}
                         <Button
                             variant='outline'
-                            className='border-[#00C979] bg-white/10 backdrop-blur-sm text-[#F6FFDF] font-inter font-medium text-sm md:text-base px-6 py-6 rounded-[10px] hover:bg-white/20 hover:border-white  transition-all cursor-pointer'
+                            className='border-[#00C979] bg-white/10 backdrop-blur-sm text-[#F6FFDF] hover:text-[#F6FFDF] active:border-white font-inter font-medium text-sm md:text-base px-6 py-6 rounded-[10px] hover:bg-white/20 hover:border-white  transition-all cursor-pointer'
                         >
                             Add Event
                         </Button>

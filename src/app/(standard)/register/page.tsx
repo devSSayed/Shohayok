@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { SubmitEvent, useState, } from 'react';
 import Link from 'next/link';
 import {
     Check,
@@ -21,6 +21,9 @@ import {
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import { authClient } from '@/lib/auth-client';
+import toast from 'react-hot-toast';
+import { redirect } from 'next/navigation';
 
 const passwordRules = [
     {
@@ -46,9 +49,9 @@ const leadingIconClassName =
     'pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#051F12]/60';
 
 const RegisterPage = () => {
-    const [fullName, setFullName] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [photoUrl, setPhotoUrl] = useState('');
+    const [image, setImage] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [submitted, setSubmitted] = useState(false);
@@ -57,16 +60,16 @@ const RegisterPage = () => {
     const passwordIsValid = ruleStates.every(Boolean);
 
     const errors = {
-        fullName: fullName.trim() ? '' : 'Full name is required',
+        name: name.trim() ? '' : 'Name is required',
         email: !email.trim()
             ? 'Email is required'
             : /^\S+@\S+\.\S+$/.test(email)
                 ? ''
                 : 'Please enter a valid email address',
-        photoUrl:
-            !photoUrl.trim()
+        image:
+            !image.trim()
                 ? 'Profile photo URL is required'
-                : /^https?:\/\/.+/.test(photoUrl)
+                : /^https?:\/\/.+/.test(image)
                     ? ''
                     : 'Please enter a valid URL starting with http:// or https://',
         password: passwordIsValid
@@ -76,15 +79,43 @@ const RegisterPage = () => {
 
     const hasErrors = Object.values(errors).some(Boolean);
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
         setSubmitted(true);
 
         if (hasErrors) return;
 
-        // TODO: wire this up to your registration API
-        console.log('register', { fullName, email, photoUrl, password });
-    };
+        const fromData = new FormData(event.currentTarget);
+
+        const user = Object.fromEntries(fromData.entries()) as { email: string; password: string; name: string; image: string };
+        console.log(user);
+
+        const {data, error} = await authClient.signUp.email({
+            ...user,
+            callbackURL: '/'
+        })
+
+        if (error) {
+            toast.error(`Error signing up: ${error.message}`,{
+                style: {
+                    background: '#F6FFDF',
+                    color: '#051F12',
+                    fontFamily: 'Inter, sans-serif',
+                },
+            }
+            );
+        } else {
+            toast.success('Account created successfully!',{
+                style: {
+                    background: '#F6FFDF',
+                    color: '#051F12',
+                    fontFamily: 'Inter, sans-serif',
+                },
+            });
+            redirect('/')
+        }
+        
+    }
 
     return (
         <section className='flex min-h-[80vh] items-center justify-center bg-[#FAFFEE] px-5 py-14'>
@@ -106,7 +137,7 @@ const RegisterPage = () => {
                 >
                     <Field>
                         <FieldLabel
-                            htmlFor='fullName'
+                            htmlFor='name'
                             className={fieldLabelClassName}
                         >
                             Full Name
@@ -114,22 +145,22 @@ const RegisterPage = () => {
                         <div className='relative'>
                             <User className={leadingIconClassName} aria-hidden />
                             <Input
-                                id='fullName'
-                                name='fullName'
+                                id='name'
+                                name='name'
                                 type='text'
                                 autoComplete='name'
                                 placeholder='Your Name'
-                                value={fullName}
+                                value={name}
                                 onChange={(event) =>
-                                    setFullName(event.target.value)
+                                    setName(event.target.value)
                                 }
-                                aria-invalid={submitted && !!errors.fullName}
+                                aria-invalid={submitted && !!errors.name}
                                 className={inputClassName}
                             />
                         </div>
-                        {submitted && errors.fullName && (
+                        {submitted && errors.name && (
                             <FieldError className='text-xs'>
-                                {errors.fullName}
+                                {errors.name}
                             </FieldError>
                         )}
                     </Field>
@@ -164,7 +195,7 @@ const RegisterPage = () => {
 
                     <Field>
                         <FieldLabel
-                            htmlFor='photoUrl'
+                            htmlFor='image'
                             className={fieldLabelClassName}
                         >
                             Profile Photo URL
@@ -175,23 +206,23 @@ const RegisterPage = () => {
                                 aria-hidden
                             />
                             <Input
-                                id='photoUrl'
-                                name='photoUrl'
+                                id='image'
+                                name='image'
                                 type='url'
                                 inputMode='url'
                                 placeholder='https://images.unsplash.com/...'
-                                value={photoUrl}
+                                value={image}
                                 onChange={(event) =>
-                                    setPhotoUrl(event.target.value)
+                                    setImage(event.target.value)
                                 }
-                                aria-invalid={submitted && !!errors.photoUrl}
+                                aria-invalid={submitted && !!errors.image}
                                 className={inputClassName}
                             />
                         </div>
 
-                        {submitted && errors.photoUrl && (
+                        {submitted && errors.image && (
                             <FieldError className='text-xs'>
-                                {errors.photoUrl}
+                                {errors.image}
                             </FieldError>
                         )}
 

@@ -12,6 +12,9 @@ import { SubmitEvent, useState } from 'react';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { authClient } from '@/lib/auth-client';
+import toast from 'react-hot-toast';
+import { redirect } from 'next/navigation';
 
 
 
@@ -43,22 +46,54 @@ const LoginPage = () => {
 
 
     const errors = {
- 
+
         email: !email.trim()
             ? 'Email is required'
             : /^\S+@\S+\.\S+$/.test(email)
                 ? ''
                 : 'Please enter a valid email address',
+
+        password: !password.trim()
+            ? 'Password is required'
+            : '',
     };
 
+    const hasErrors = Object.values(errors).some(Boolean);
 
-    const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
         setSubmitted(true);
 
+        if (hasErrors) return;
 
-        // TO-DO: wire this up to your registration API
-        console.log('register', { email, password });
+        const fromData = new FormData(event.currentTarget);
+
+        const user = Object.fromEntries(fromData.entries()) as { email: string; password: string };
+
+        const { data, error } = await authClient.signIn.email({
+            ...user,
+        })
+
+
+        if (error) {
+            toast.error(`Error signing in: ${error.message}`, {
+                style: {
+                    background: '#F6FFDF',
+                    color: '#051F12',
+                    fontFamily: 'Inter, sans-serif',
+                },
+            }
+            );
+        } else {
+            toast.success(`Welcome back, ${data.user.name}`, {
+                style: {
+                    background: '#F6FFDF',
+                    color: '#051F12',
+                    fontFamily: 'Inter, sans-serif',
+                },
+            });
+            redirect('/');
+        }
     };
 
     return (
@@ -96,7 +131,9 @@ const LoginPage = () => {
                                 autoComplete='email'
                                 placeholder='name@example.com'
                                 value={email}
-                                onChange={(event) => setEmail(event.target.value)}
+                                onChange={(event) =>
+                                    setEmail(event.target.value)
+                                }
                                 aria-invalid={submitted && !!errors.email}
                                 className={inputClassName}
                             />
@@ -128,6 +165,7 @@ const LoginPage = () => {
                                 onChange={(event) =>
                                     setPassword(event.target.value)
                                 }
+                                aria-invalid={submitted && !!errors.password}
                                 className={cn(inputClassName, 'pr-10')}
                             />
                             <button
@@ -147,6 +185,12 @@ const LoginPage = () => {
                                 )}
                             </button>
                         </div>
+
+                        {submitted && errors.password && (
+                            <FieldError className='text-xs'>
+                                {errors.password}
+                            </FieldError>
+                        )}
 
                     </Field>
 
