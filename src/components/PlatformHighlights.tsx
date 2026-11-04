@@ -65,10 +65,10 @@ const PlatformHighlights = () => {
                                 <span
                                     className={`inline-flex size-12 items-center justify-center `}
                                 >
-                                    <Icon className='size-24 text-[#F6FFDF]' />
+                                    <Icon className='size-24 text-[#D8FF85]' />
                                 </span>
 
-                                <h3 className='mt-5 text-xl sm:text-lg font-inter font-semibold text-[#F6FFDF]'>
+                                <h3 className='mt-5 text-xl sm:text-lg font-inter font-semibold text-[#FAFFEE]'>
                                     {feature.title}
                                 </h3>
                                 <p className='mt-2 text-[14px] text-[#F6FFDF]/80 font-inter sm:text-sm leading-relaxed'>
