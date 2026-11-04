@@ -15,6 +15,7 @@ import { cn } from '@/lib/utils';
 import { authClient } from '@/lib/auth-client';
 import toast from 'react-hot-toast';
 import { redirect } from 'next/navigation';
+import { FcGoogle } from 'react-icons/fc';
 
 
 
@@ -93,6 +94,24 @@ const LoginPage = () => {
                 },
             });
             redirect('/');
+        }
+    };
+
+    const handleGoogleSignIn = async () => {
+        const { data, error } = await authClient.signIn.social({
+            provider: 'google',
+            callbackURL: '/',
+        });
+
+        if (error) {
+            toast.error(`Error signing in: ${error.message}`, {
+                style: {
+                    background: '#F6FFDF',
+                    color: '#051F12',
+                    fontFamily: 'Inter, sans-serif',
+                },
+            }
+            );
         }
     };
 
@@ -202,6 +221,27 @@ const LoginPage = () => {
                     </Button>
                 </form>
 
+
+                {/* OR CONTINUE WITH DIVIDER */}
+                <div className='relative my-6 flex items-center justify-center'>
+                    <div className='absolute inset-0 flex items-center'>
+                        <div className='w-full border-t border-[#E5E7EB]' />
+                    </div>
+                    <span className='relative bg-[#FAFFEE] px-4 text-xs font-semibold uppercase tracking-wider text-[#051F12]/50'>
+                        Or continue with
+                    </span>
+                </div>
+
+                {/* GOOGLE SIGN-IN BUTTON */}
+                <button
+                    type='button'
+                    onClick={handleGoogleSignIn}
+                    className='flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-[#E5E7EB] bg-white text-[15px] font-semibold text-[#111827] shadow-sm transition-all hover:bg-gray-50 active:bg-gray-100 cursor-pointer'
+                >
+                    <FcGoogle className='text-2xl' />
+                    Continue with Google
+                </button>
+
                 <p className='mt-5 text-center text-sm text-[#051F12]/60'>
                     Don&apos;t have an account?{' '}
                     <Link
@@ -211,6 +251,7 @@ const LoginPage = () => {
                         Register here
                     </Link>
                 </p>
+
             </div>
         </section>
     );

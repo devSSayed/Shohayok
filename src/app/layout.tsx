@@ -23,6 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      data-theme="light"
       className={`${hanken_Grotesk.variable} ${inter.variable} antialiased`}
     >
       <body className="min-h-screen flex flex-col bg-[#F6FFDF] ">        
