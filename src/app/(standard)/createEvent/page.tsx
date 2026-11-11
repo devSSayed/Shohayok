@@ -23,6 +23,7 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import toast from 'react-hot-toast';
 import { Textarea } from '@/components/ui/textarea';
+import { authClient } from '@/lib/auth-client';
 
 const EVENT_TYPES = [
     'Donation',
@@ -47,6 +48,8 @@ const getTodayString = () => {
     const day = String(now.getDate()).padStart(2, '0');
     return `${now.getFullYear()}-${month}-${day}`;
 };
+
+
 
 const CreateEvent = () => {
     const [title, setTitle] = useState('');
@@ -90,7 +93,9 @@ const CreateEvent = () => {
 
     const hasErrors = Object.values(errors).some(Boolean);
 
-    const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+    const { data: session } = authClient.useSession();
+
+    const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const dateErrorNow = !date
@@ -113,7 +118,37 @@ const CreateEvent = () => {
             description: string;
         };
 
-        console.log(newEvent);
+        const eventData = {
+            ...newEvent,
+            createdBy: {
+                name: session?.user.name,
+                email: session?.user.email,
+                image: session?.user.image,
+                userId: session?.user.id
+
+            },
+        };
+
+        console.log(eventData);
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/create-event`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(eventData)
+        })
+
+        if (!res.ok) {
+            toast.error(`Failed to publish event`, {
+                style: {
+                    background: '#F6FFDF',
+                    color: '#051F12',
+                    fontFamily: 'Inter, sans-serif',
+                },
+            }
+            );
+        }
 
         toast.success('Event published successfully!', {
             style: {
@@ -123,14 +158,6 @@ const CreateEvent = () => {
             },
         });
 
-        setTitle('');
-        setEventType('Donation');
-        setDate('');
-        setLocation('');
-        setThumbnail('');
-        setDescription('');
-        setDateError('');
-        setSubmitted(false);
     };
 
     return (
@@ -325,7 +352,7 @@ const CreateEvent = () => {
                             >
                                 Event Description <span className='text-red-500'>*</span>
                             </FieldLabel>
-                            <Textarea 
+                            <Textarea
                                 id='description'
                                 name='description'
                                 placeholder='Explain the purpose of the drive, volunteers required, items being distributed or tasks to complete...'
