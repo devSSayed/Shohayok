@@ -26,6 +26,7 @@ import { IoMdAddCircleOutline } from 'react-icons/io';
 import { FaRegCalendarCheck } from 'react-icons/fa';
 import { FaGear } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
+import { Skeleton } from '../ui/skeleton';
 
 
 
@@ -63,7 +64,23 @@ const Navbar = ({ variant = 'solid' }: NavbarProps) => {
                 }`}
         >
             {
-                isPending ? <div>Loading...</div>
+                isPending ? <header className="flex h-20 w-full container mx-auto items-center justify-between gap-2.5 px-2 backdrop-blur-xs">
+                    {/* Left: Logo + Brand Name Skeleton */}
+                    <div className="flex items-center gap-3">
+                        <Skeleton className="size-10 rounded-xl bg-[#004a10]/50" />
+                        <div className="space-y-1.5">
+                            <Skeleton className="h-4 w-28 bg-[#004a10]/50" />
+                            <Skeleton className="h-3 w-16 bg-[#004a10]/50" />
+                        </div>
+                    </div>
+
+                    {/* Right: Link + Avatar + Button Skeletons */}
+                    <div className="flex items-center gap-1.5 md:gap-6">
+                        <Skeleton className="h-4 w-28 bg-[#004a10]/50" />
+                        <Skeleton className="size-10 rounded-full bg-[#004a10]/50" />
+                        <Skeleton className="h-10 w-20 rounded-xl bg-[#004a10]/50 hidden md:block" />
+                    </div>
+                </header>
 
                     :
 
@@ -108,13 +125,13 @@ const Navbar = ({ variant = 'solid' }: NavbarProps) => {
                                     <DropdownMenuGroup>
                                         <DropdownMenuSeparator />
                                         <DropdownMenuItem className='focus:bg-gray-400/20 cursor-pointer text-[#051F12]'>
-                                            <IoMdAddCircleOutline />  Create Event
+                                            <Link href="/createEvent" className='flex items-center gap-2'> <IoMdAddCircleOutline />  Create Event</Link>
                                         </DropdownMenuItem>
                                         <DropdownMenuItem className='focus:bg-gray-400/20 cursor-pointer text-[#051F12]'>
-                                            <FaGear /> Manage Events
+                                            <Link href="/manageEvents" className='flex items-center gap-2'> <FaGear /> Manage Events</Link>
                                         </DropdownMenuItem>
                                         <DropdownMenuItem className='focus:bg-gray-400/20 cursor-pointer text-[#051F12]'>
-                                            <FaRegCalendarCheck /> Joined Events
+                                            <Link href="/joinedEvents" className='flex items-center gap-2'> <FaRegCalendarCheck /> Joined Events</Link>
                                         </DropdownMenuItem>
                                     </DropdownMenuGroup>
                                     <DropdownMenuSeparator />

@@ -95,10 +95,10 @@ const Footer = () => {
                                 "Emergency Relief & Aid"
                             ].map((drive) => (
                                 <li key={drive}>
-                                    <a href="#link" className="group flex items-center gap-2.5 text-[#F6FFDF]/80 hover:text-[#D8FF85] transition-colors">
+                                    <div  className="group flex items-center gap-2.5 text-[#F6FFDF]/80 hover:text-[#D8FF85] transition-colors cursor-default">
                                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/60 group-hover:bg-emerald-400 group-hover:scale-125 transition-all"></span>
                                         <span className="group-hover:translate-x-1 transition-transform">{drive}</span>
-                                    </a>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
