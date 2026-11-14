@@ -1,4 +1,5 @@
 import Banner from "@/components/banner";
+import GallerySection from "@/components/GallerySection";
 import ImpactStats from "@/components/ImpactStats";
 import Navbar from "@/components/NavCompo/Navbar";
 import NewsLetterSec from "@/components/NewsLetterSec";
@@ -17,6 +18,7 @@ export default function Home() {
       <ImpactStats />
       <PlatformHighlights />
       <RecentEvents />
+      <GallerySection />
       <NewsLetterSec />
     </div>
   );
