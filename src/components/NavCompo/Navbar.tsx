@@ -27,6 +27,7 @@ import { FaRegCalendarCheck } from 'react-icons/fa';
 import { FaGear } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '../ui/skeleton';
+import { RxAvatar } from 'react-icons/rx';
 
 
 
@@ -95,7 +96,7 @@ const Navbar = ({ variant = 'solid' }: NavbarProps) => {
                         {/* Right Links & Button */}
                         <div className='flex items-center gap-6'>
                             <Link
-                                href='/events'
+                                href='/upcoming-events'
                                 className='font-inter text-[14px] md:text-[16px] font-medium text-[#F6FFDF] hover:underline transition-colors flex items-center gap-2 cursor-pointer'
                             >
                                 Upcoming Events
@@ -110,7 +111,7 @@ const Navbar = ({ variant = 'solid' }: NavbarProps) => {
                                             className=""
                                         />
 
-                                        <AvatarFallback>CN</AvatarFallback>
+                                        <AvatarFallback><RxAvatar className='size-10'/></AvatarFallback>
                                     </Avatar>
                                 </Button>} />
                                 <DropdownMenuContent className="w-48 font-inter bg-[#FAFFEE]" side='bottom' align="end" sideOffset={10}>
@@ -165,7 +166,7 @@ const Navbar = ({ variant = 'solid' }: NavbarProps) => {
                             {/* Right Links & Button */}
                             <div className='flex items-center gap-6'>
                                 <Link
-                                    href='/events'
+                                    href='/upcoming-events'
                                     className='font-inter text-[14px] md:text-[16px] font-medium text-[#F6FFDF] hover:underline transition-colors flex items-center gap-2 cursor-pointer'
                                 >
                                     Upcoming Events

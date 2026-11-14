@@ -5,6 +5,14 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
+  images: {
+    // Event thumbnails are submitted by users, so the host is unknown ahead
+    // of time. http/https only, every path and query string allowed.
+    remotePatterns: [
+      { protocol: "https", hostname: "**" },
+      { protocol: "http", hostname: "**" },
+    ],
+  },
   turbopack: {
     rules: {
       "*.css": {

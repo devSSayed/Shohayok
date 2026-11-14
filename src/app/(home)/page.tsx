@@ -3,6 +3,7 @@ import ImpactStats from "@/components/ImpactStats";
 import Navbar from "@/components/NavCompo/Navbar";
 import NewsLetterSec from "@/components/NewsLetterSec";
 import PlatformHighlights from "@/components/PlatformHighlights";
+import RecentEvents from "@/components/RecentEvents";
 
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       
       <ImpactStats />
       <PlatformHighlights />
+      <RecentEvents />
       <NewsLetterSec />
     </div>
   );
