@@ -2,8 +2,13 @@
 
 > **Turning empathy into action, one community at a time.**
 
-Shohayok is a community-driven platform that brings volunteers and local causes together across Bangladesh. Discover initiatives, organize events, and make a meaningful difference in your community.
+<div align="center">
 
+🌐 **[Visit Live Website](https://shohayok-zeta.vercel.app/)**
+
+</div>
+
+Shohayok is a community-driven platform that brings volunteers and local causes together across Bangladesh. Discover initiatives, organize events, and make a meaningful difference in your community.
 ---
 
 ## 🧰 Tech Stack
