@@ -1,13 +1,14 @@
 import Link from 'next/link';
-import { ArrowRight, Calendar, MapPin, Tag, } from 'lucide-react';
+import { ArrowRight, Calendar, MapPin, Tag } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { RxAvatar } from 'react-icons/rx';
 import { formatEventDate, truncateWords, type EventItem } from './eventHelpers';
 import Image from 'next/image';
 import EditDialougeButton from '@/components/EditDialogButton';
 import DeleteDialogButton from '@/components/DeleteDialogButton';
+import LeaveEvent from '@/components/LeaveEvent';
 
-const EventCard = ({ event, manage = false }: { event: EventItem; manage?: boolean }) => {
+const EventCard = ({ event, manage = false, joined = false }: { event: EventItem; manage?: boolean; joined?: boolean }) => {
     const organizer = event.createdBy;
     const location = truncateWords(event.location);
 
@@ -107,6 +108,19 @@ const EventCard = ({ event, manage = false }: { event: EventItem; manage?: boole
 
                             <DeleteDialogButton event={event} />
                             
+                        </div>
+                    ) : joined ? (
+                        /* Joined view — View / Leave (leave wired up elsewhere) */
+                        <div className='mt-3.5 grid grid-cols-[2fr_1fr] gap-2'>
+                            <Link
+                                href={`upcoming-events/${event.eventId ?? event._id}`}
+                                className='inline-flex items-center justify-center rounded-xl bg-[#00C979]/15 px-2 py-2.5 text-[12px] font-semibold whitespace-nowrap text-[#003006] transition-colors duration-300 hover:bg-[#00C979]/30 focus-visible:ring-2 focus-visible:ring-[#003006]/30 focus-visible:outline-none'
+                            >
+                                View
+                            </Link>
+
+                            <LeaveEvent joinId={event._id} />
+
                         </div>
                     ) : (
                         <Link

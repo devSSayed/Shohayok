@@ -1,18 +1,17 @@
 import { Suspense } from 'react';
-import { Settings } from 'lucide-react';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import EventCard from '../upcoming-events/EventCard';
-import { type EventItem } from '../upcoming-events/eventHelpers';
+import { isUpcoming, type EventItem } from '../upcoming-events/eventHelpers';
+import EventsEmptyState from '@/components/EventsEmptyState';
 
 const ManageEventsPage = () => {
     return (
         <div className='min-h-screen bg-[#FAFFEE] font-inter'>
             {/* Header — no "Create New Event" button */}
-            <div className='border-b border-[#051F12]/10'>
-                <div className='mx-auto max-w-7xl px-5 pt-12 pb-9'>
-                    <span className='inline-flex items-center gap-2 rounded-full border border-[#00C979]/30 bg-[#00C979]/15 px-3.5 py-1.5 text-xs font-semibold text-[#003006]'>
-                        <Settings className='size-3.5 text-[#00C979]' aria-hidden />
+            <div className='border-b border-[#051F12]/10 flex flex-col items-center justify-center text-center'>
+                <div className='mx-auto max-w-7xl px-5 pt-12 pb-9 '>
+                    <span className='text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] border-2 border-[#00C979] py-1.5 px-2.5 rounded-[10px] text-[#003006] font-inter'>
                         Organizer Dashboard
                     </span>
 
@@ -81,9 +80,20 @@ const MyEventsGrid = async () => {
         }
     }
 
+    const active = myEvents.filter((event) => isUpcoming(event.date));
+
+    if (active.length === 0) {
+        return (
+            <EventsEmptyState
+                title="You haven't created any events yet"
+                description='Publish a social drive and it will show up here for the community to join.'
+            />
+        );
+    }
+
     return (
         <div className='grid gap-5 sm:grid-cols-2 lg:grid-cols-3'>
-            {myEvents.map((event) => (
+            {active.map((event) => (
                 <EventCard key={event._id} event={event} manage />
             ))}
         </div>

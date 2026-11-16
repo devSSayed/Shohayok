@@ -5,6 +5,7 @@ import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import Image from 'next/image';
 import { formatEventDate, isUpcoming, sortBySoonest } from '@/app/(standard)/upcoming-events/eventHelpers';
+import EventsEmptyState from './EventsEmptyState';
 import { RxAvatar } from 'react-icons/rx';
 
 interface EventOrganizer {
@@ -56,7 +57,15 @@ const RecentEvents = async () => {
                 </div>
             </div>
 
-            <div className='max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+            {data.length === 0 ? (
+                <div className='mx-auto max-w-6xl'>
+                    <EventsEmptyState
+                        title='No upcoming events right now'
+                        description='New community initiatives are added regularly—check back soon.'
+                    />
+                </div>
+            ) : (
+                <div className='max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-4'>
                 {
                     data.map((event: EventItem) => {
                         return (
@@ -157,7 +166,8 @@ const RecentEvents = async () => {
 
                     })
                 }
-            </div>
+                </div>
+            )}
 
         </section>
     );

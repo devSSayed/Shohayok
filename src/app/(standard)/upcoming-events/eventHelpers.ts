@@ -7,6 +7,8 @@ export interface EventOrganizer {
 
 export interface EventItem {
     _id: string;
+    /** On join records: the _id of the event this record belongs to. */
+    eventId?: string;
     title: string;
     type: string;
     date: string;

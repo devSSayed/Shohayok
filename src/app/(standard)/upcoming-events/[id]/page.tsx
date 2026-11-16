@@ -1,11 +1,15 @@
 import { Suspense } from 'react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { Calendar, Mail, MapPin, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, Mail, MapPin, Tag } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { RxAvatar } from 'react-icons/rx';
 import { formatEventDate, type EventItem } from '../eventHelpers';
 import JoinButton from './JoinButton';
+import LeaveEvent from '@/components/LeaveEvent';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import Link from 'next/link';
 
 const VOLUNTEER_GUIDELINES = [
     'Be punctual and make sure you\'re prepared before each volunteer drive begins.',
@@ -54,11 +58,43 @@ const EventDetail = async ({
     const event: EventItem = await res.json();
     const organizer = event.createdBy;
 
+    /* Viewer state — inside <Suspense> as required for headers()/session reads. */
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+
+    const viewerEmail = session?.user?.email;
+    const isCreator = Boolean(viewerEmail && event.createdBy?.email === viewerEmail);
+
+    /* Has this viewer joined? Join records carry the event's id as `eventId`. */
+    let joinId: string | null = null;
+
+    if (viewerEmail && !isCreator) {
+        const joinRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/join-event/${viewerEmail}`);
+        const joinData = joinRes.ok ? await joinRes.json() : [];
+
+        if (Array.isArray(joinData)) {
+            const match = joinData.find(
+                (join: { _id: string; eventId?: string }) => join.eventId === event._id
+            );
+            joinId = match?._id ?? null;
+        }
+    }
+
     return (
         <>
             {/* ── Big cover image ── */}
             <div className='mx-auto max-w-7xl px-5 pt-5'>
-                <div className='relative h-[260px] w-full overflow-hidden rounded-2xl bg-[#051F12]/10 sm:h-[380px] lg:h-[440px]'>
+
+                <Link
+                    href='/upcoming-events'
+                    className='mb-4 inline-flex items-center gap-1.5 text-sm text-[#051F12]/60 transition-colors hover:text-[#051F12]'
+                >
+                    <ArrowLeft className='size-4' aria-hidden />
+                    Back to Upcoming Events
+                </Link>
+
+                <div className='relative h-65 w-full overflow-hidden rounded-2xl bg-[#051F12]/10 sm:h-95 lg:h-110'>
                     {event.thumbnail ? (
                         <Image
                             src={event.thumbnail}
@@ -167,8 +203,13 @@ const EventDetail = async ({
                         </div>
                     </div>
 
-                    {/* join — sits where "Confirmed Volunteers" was */}
-                    <JoinButton />
+                    {/* join / leave — hidden entirely when the viewer created this event */}
+                    {!isCreator &&
+                        (joinId ? (
+                            <LeaveEvent joinId={joinId} label="Leave Event" variant="detail" />
+                        ) : (
+                            <JoinButton eventData={event} />
+                        ))}
                 </aside>
             </div>
         </>

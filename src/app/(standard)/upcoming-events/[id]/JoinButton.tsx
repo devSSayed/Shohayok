@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { CheckCircle2, UserPlus } from 'lucide-react';
+import { UserPlus } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { EventItem } from '../eventHelpers';
+import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
 
 /** Same toast styling the login page uses. */
 const TOAST_STYLE = {
@@ -11,36 +13,51 @@ const TOAST_STYLE = {
     fontFamily: 'Inter, sans-serif',
 };
 
-const JoinButton = () => {
-    const [joined, setJoined] = useState(false);
+const JoinButton = ({ eventData }: { eventData: EventItem }) => {
+    const router = useRouter();
 
-    const handleToggle = () => {
-        const nowJoined = !joined;
-        setJoined(nowJoined);
+    const { data: session } = authClient.useSession();
 
-        toast.success(
-            nowJoined ? 'You have joined this event!' : 'You have left this event',
-            { style: TOAST_STYLE },
-        );
+    const handleJoin = async () => {
+        const { _id, ...restEventData } = eventData;
+
+        const joinedEventData = {
+            ...restEventData,
+            eventId: _id,
+            joinedBy: {
+                name: session?.user.name,
+                email: session?.user.email,
+                joinedId: session?.user.id,
+            },
+        };
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/join-event`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(joinedEventData)
+        })
+
+        if (!res.ok) {
+            toast.error(`Failed to join`, { style: TOAST_STYLE });
+            return;
+        }
+
+        toast.success('You have joined this event!', { style: TOAST_STYLE });
+
+        router.refresh();
     };
 
     return (
         <button
             type='button'
-            onClick={handleToggle}
-            aria-pressed={joined}
-            className={
-                joined
-                    ? 'inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#003006] px-4 py-3.5 text-sm font-semibold text-[#F6FFDF] transition-colors duration-300 hover:bg-[#00C979] hover:text-[#003006] focus-visible:ring-2 focus-visible:ring-[#00C979]/40 focus-visible:outline-none'
-                    : 'inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#00C979] px-4 py-3.5 text-sm font-semibold text-[#003006] transition-colors duration-300 hover:bg-[#003006] hover:text-[#F6FFDF] focus-visible:ring-2 focus-visible:ring-[#003006]/30 focus-visible:outline-none'
-            }
+            onClick={handleJoin}
+            className='inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#00C979] px-4 py-3.5 text-sm font-semibold text-[#003006] 
+            transition-colors duration-300 hover:bg-[#003006] hover:text-[#F6FFDF] focus-visible:ring-2 focus-visible:ring-[#003006]/30 focus-visible:outline-none'
         >
-            {joined ? (
-                <CheckCircle2 className='size-4 shrink-0' aria-hidden />
-            ) : (
-                <UserPlus className='size-4 shrink-0' aria-hidden />
-            )}
-            {joined ? 'Joined (Click to Leave)' : 'Join Event'}
+            <UserPlus className='size-4 shrink-0' aria-hidden />
+            Join Event
         </button>
     );
 };

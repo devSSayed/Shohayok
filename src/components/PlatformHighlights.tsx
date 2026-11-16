@@ -35,7 +35,7 @@ const PlatformHighlights = () => {
     return (
         <section className='px-5 py-16 sm:py-20 bg-[#F6FFDF]'>
             <div className='mx-auto max-w-6xl text-center flex flex-col items-center justify-center gap-3 xl:gap-6'>
-                <p className='text-xs font-semibold uppercase tracking-[0.2em] border-2 border-[#00C979] py-1.5 px-2.5 rounded-[10px] text-[#003006] font-inter'>
+                <p className='text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] border-2 border-[#00C979] py-1.5 px-2.5 rounded-[10px] text-[#003006] font-inter'>
                     Platform Highlights
                 </p>
                 <div className='space-y-3'>

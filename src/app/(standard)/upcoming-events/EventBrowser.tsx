@@ -5,6 +5,7 @@ import { Calendar } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import EventCard from './EventCard';
 import { ALL_CATEGORIES, type EventItem } from './eventHelpers';
+import EventsEmptyState from '@/components/EventsEmptyState';
 
 interface EventBrowserProps {
     events: EventItem[];
@@ -36,6 +37,18 @@ const EventBrowser = ({ events, categories }: EventBrowserProps) => {
         activeCategory === ALL_CATEGORIES
             ? `${events.length} upcoming event${events.length === 1 ? '' : 's'}`
             : `${visibleEvents.length} of ${events.length} events`;
+
+    // Nothing active at all (empty list or every event expired)
+    if (events.length === 0) {
+        return (
+            <div className='mt-8'>
+                <EventsEmptyState
+                    title='No upcoming events right now'
+                    description='New community initiatives are added regularly—check back soon.'
+                />
+            </div>
+        );
+    }
 
     return (
         <div>
@@ -96,14 +109,10 @@ const EventBrowser = ({ events, categories }: EventBrowserProps) => {
                 <div className='mt-8 rounded-2xl border border-dashed border-[#051F12]/15 bg-white/70 px-6 py-16 text-center'>
                     <Calendar className='mx-auto size-9 text-[#00C979]' aria-hidden />
                     <h3 className='mt-4 font-hanken_Grotesk text-lg font-bold text-[#051F12]'>
-                        {events.length === 0
-                            ? 'No upcoming events right now'
-                            : `No ${activeCategory} events scheduled yet`}
+                        No {activeCategory} events scheduled yet
                     </h3>
                     <p className='mx-auto mt-1.5 max-w-sm font-inter text-sm leading-relaxed text-[#051F12]/55'>
-                        {events.length === 0
-                            ? 'New community drives are published regularly — check back soon.'
-                            : 'Try another category — new drives are added every week.'}
+                        Try another category — new drives are added every week.
                     </p>
                 </div>
             )}

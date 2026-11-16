@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-import { CalendarDays } from 'lucide-react';
 import EventsGrid from './EventsGrid';
 import EventsSkeleton from './EventsSkeleton';
 
@@ -9,8 +8,7 @@ const UpComingEvents = () => {
             {/* Page header — centered, no "Create Event" button */}
             <div className='border-b border-[#051F12]/10'>
                 <div className='mx-auto max-w-6xl px-5 pt-12 pb-10 text-center sm:pt-14'>
-                    <span className='inline-flex items-center gap-2 rounded-full border border-[#00C979]/30 bg-[#00C979]/15 px-3.5 py-1.5 text-xs font-semibold text-[#003006]'>
-                        <CalendarDays className='size-3.5 text-[#00C979]' aria-hidden />
+                    <span className='text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] border-2 border-[#00C979] py-1.5 px-2.5 rounded-[10px] text-[#003006] font-inter'>
                         Future Shohayok Drives
                     </span>
 

@@ -111,7 +111,7 @@ const Navbar = ({ variant = 'solid' }: NavbarProps) => {
                                             className=""
                                         />
 
-                                        <AvatarFallback><RxAvatar className='size-10'/></AvatarFallback>
+                                        <AvatarFallback><RxAvatar className='size-10' /></AvatarFallback>
                                     </Avatar>
                                 </Button>} />
                                 <DropdownMenuContent className="w-48 font-inter bg-[#FAFFEE]" side='bottom' align="end" sideOffset={10}>
@@ -125,15 +125,25 @@ const Navbar = ({ variant = 'solid' }: NavbarProps) => {
                                     </DropdownMenuGroup>
                                     <DropdownMenuGroup>
                                         <DropdownMenuSeparator />
-                                        <DropdownMenuItem className='focus:bg-gray-400/20 cursor-pointer text-[#051F12]'>
-                                            <Link href="/createEvent" className='flex items-center gap-2'> <IoMdAddCircleOutline />  Create Event</Link>
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem className='focus:bg-gray-400/20 cursor-pointer text-[#051F12]'>
-                                            <Link href="/manage-events" className='flex items-center gap-2'> <FaGear /> Manage Events</Link>
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem className='focus:bg-gray-400/20 cursor-pointer text-[#051F12]'>
-                                            <Link href="/joinedEvents" className='flex items-center gap-2'> <FaRegCalendarCheck /> Joined Events</Link>
-                                        </DropdownMenuItem>
+                                        
+                                        <Link href="/createEvent" className=''>
+                                            <DropdownMenuItem className='focus:bg-gray-400/20 cursor-pointer text-[#051F12] flex items-center gap-2'>
+                                                <IoMdAddCircleOutline />  Create Event
+                                            </DropdownMenuItem>
+                                        </Link>
+
+                                        <Link href="/manage-events" className=''>
+                                            <DropdownMenuItem className='focus:bg-gray-400/20 cursor-pointer text-[#051F12] flex items-center gap-2'>
+                                                <FaGear /> Manage Events
+                                            </DropdownMenuItem>
+                                        </Link>
+
+                                        <Link href="/joined-events" className=''>
+                                            <DropdownMenuItem className='focus:bg-gray-400/20 cursor-pointer text-[#051F12] flex items-center gap-2'>
+                                                <FaRegCalendarCheck /> Joined Events
+                                            </DropdownMenuItem>
+                                        </Link>
+
                                     </DropdownMenuGroup>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuGroup>

@@ -177,7 +177,7 @@ const CreateEvent = () => {
         <section className='flex min-h-[80vh] items-center justify-center bg-[#FAFFEE] px-5 py-14'>
             <div className='w-full max-w-3xl font-inter'>
                 <Link
-                    href='/events'
+                    href='/upcoming-events'
                     className='mb-4 inline-flex items-center gap-1.5 text-sm text-[#051F12]/60 transition-colors hover:text-[#051F12]'
                 >
                     <ArrowLeft className='size-4' aria-hidden />
