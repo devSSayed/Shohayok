@@ -129,7 +129,7 @@ const Navbar = ({ variant = 'solid' }: NavbarProps) => {
                                             <Link href="/createEvent" className='flex items-center gap-2'> <IoMdAddCircleOutline />  Create Event</Link>
                                         </DropdownMenuItem>
                                         <DropdownMenuItem className='focus:bg-gray-400/20 cursor-pointer text-[#051F12]'>
-                                            <Link href="/manageEvents" className='flex items-center gap-2'> <FaGear /> Manage Events</Link>
+                                            <Link href="/manage-events" className='flex items-center gap-2'> <FaGear /> Manage Events</Link>
                                         </DropdownMenuItem>
                                         <DropdownMenuItem className='focus:bg-gray-400/20 cursor-pointer text-[#051F12]'>
                                             <Link href="/joinedEvents" className='flex items-center gap-2'> <FaRegCalendarCheck /> Joined Events</Link>

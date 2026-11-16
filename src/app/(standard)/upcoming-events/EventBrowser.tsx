@@ -41,7 +41,7 @@ const EventBrowser = ({ events, categories }: EventBrowserProps) => {
         <div>
             <div className='flex items-end justify-between gap-6 border-b border-[#051F12]/10'>
                 <nav
-                    className='-mx-1 flex gap-4 overflow-x-auto px-1 pt-2 sm:gap-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
+                    className='-mx-1 flex gap-4 overflow-x-auto px-1 pt-2 sm:gap-6 scrollbar-none [&::-webkit-scrollbar]:hidden'
                     aria-label='Filter events by category'
                 >
                     {tabs.map((tab) => {
@@ -72,7 +72,7 @@ const EventBrowser = ({ events, categories }: EventBrowserProps) => {
                                 </sup>
                                 {isActive && (
                                     <span
-                                        className='absolute inset-x-0 bottom-0 h-[3px] rounded-full bg-[#00C979]'
+                                        className='absolute inset-x-0 bottom-0 h-0.75 rounded-full bg-[#00C979]'
                                         aria-hidden
                                     />
                                 )}

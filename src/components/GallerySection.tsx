@@ -85,7 +85,7 @@ const GallerySection = () => {
                         <span className='h-px w-8 bg-[#00C979]/40 sm:w-12' aria-hidden />
                     </div>
 
-                    <h2 className='mt-4 font-hanken_Grotesk text-4xl font-bold tracking-tight text-[#003006] sm:text-5xl'>
+                    <h2 className='mt-4 font-hanken_Grotesk text-4xl font-bold tracking-tight text-[#] sm:text-5xl'>
                         A Legacy of Making a Difference
                     </h2>
 
@@ -168,7 +168,7 @@ const GallerySection = () => {
                                 </div>
 
                                 <p
-                                    className='mt-2 text-sm leading-relaxed text-[#003006]/60'
+                                    className='mt-2 line-clamp-2 text-sm leading-relaxed text-[#003006]/60'
                                     title={story.description}
                                 >
                                     {story.description}

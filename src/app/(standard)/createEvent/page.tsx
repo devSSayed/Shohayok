@@ -24,6 +24,7 @@ import { cn } from '@/lib/utils';
 import toast from 'react-hot-toast';
 import { Textarea } from '@/components/ui/textarea';
 import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
 
 const EVENT_TYPES = [
     'Donation',
@@ -52,6 +53,9 @@ const getTodayString = () => {
 
 
 const CreateEvent = () => {
+
+    const router = useRouter();
+
     const [title, setTitle] = useState('');
     const [eventType, setEventType] = useState<string>('Donation');
     const [date, setDate] = useState('');
@@ -148,15 +152,24 @@ const CreateEvent = () => {
                 },
             }
             );
+
+            return
         }
 
-        toast.success('Event published successfully!', {
-            style: {
-                background: '#F6FFDF',
-                color: '#051F12',
-                fontFamily: 'Inter, sans-serif',
-            },
-        });
+        if (res.ok) {
+
+            toast.success('Event published successfully!', {
+                style: {
+                    background: '#F6FFDF',
+                    color: '#051F12',
+                    fontFamily: 'Inter, sans-serif',
+                },
+            });
+
+            router.push('/upcoming-events');
+            router.refresh();
+        }
+
 
     };
 

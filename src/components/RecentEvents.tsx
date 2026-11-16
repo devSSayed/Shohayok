@@ -26,9 +26,9 @@ interface EventItem {
 }
 
 const RecentEvents = async () => {
-    "use cache";
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/recentEvents`);
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/recentEvents`, {cache: 'no-store'});
 
     if (!res.ok) {
         throw new Error(`Failed to load events (${res.status})`);
@@ -141,7 +141,7 @@ const RecentEvents = async () => {
                                         </div>
 
                                         <Link
-                                            href='/'
+                                            href={`upcoming-events/${event._id}`}
                                             className='mt-3.5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#00C979] px-4 py-3 text-sm font-inter font-semibold text-[#003006] transition-colors duration-300 hover:bg-[#003006] hover:text-[#F6FFDF] focus-visible:ring-2 focus-visible:ring-[#003006]/30 focus-visible:outline-none'
                                         >
                                             View Event

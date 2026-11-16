@@ -48,6 +48,16 @@ function parseEventDate(value: string): Date | null {
     return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
 
+/** "12/15/2026" or "2026-12-05" → "2026-12-15" for <input type="date">. */
+export function toDateInputValue(value: string): string {
+    const parsed = parseEventDate(value);
+    if (!parsed) return '';
+
+    const month = String(parsed.getMonth() + 1).padStart(2, '0');
+    const day = String(parsed.getDate()).padStart(2, '0');
+    return `${parsed.getFullYear()}-${month}-${day}`;
+}
+
 export function formatEventDate(value: string): string {
     const parsed = parseEventDate(value);
     if (!parsed) return value;
