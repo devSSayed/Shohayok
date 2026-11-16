@@ -44,7 +44,7 @@ const Footer = () => {
                         <ul className="space-y-2.5 text-sm font-medium">
                             <li>
                                 <Link
-                                    href="/events"
+                                    href="/upcoming-events"
                                     className="text-[#F6FFDF] hover:text-[#D8FF85] transition-colors flex items-center gap-2"
                                 >
                                     <Compass className="w-4 h-4 text-[#F6FFDF]/80" />
@@ -53,7 +53,7 @@ const Footer = () => {
                             </li>
                             <li>
                                 <Link
-                                    href="/create"
+                                    href="/createEvent"
                                     className="text-[#F6FFDF] hover:text-[#D8FF85]  transition-colors flex items-center gap-2"
                                 >
                                     <PlusCircle className="w-4 h-4 text-[#F6FFDF]/80" />
@@ -62,7 +62,7 @@ const Footer = () => {
                             </li>
                             <li>
                                 <Link
-                                    href="/my-events"
+                                    href="/manage-events"
                                     className="text-[#F6FFDF] hover:text-[#D8FF85]  transition-colors flex items-center gap-2"
                                 >
                                     <Calendar className="w-4 h-4 text-[#F6FFDF]/80" />
@@ -71,7 +71,7 @@ const Footer = () => {
                             </li>
                             <li>
                                 <Link
-                                    href="/joined"
+                                    href="/joined-events"
                                     className="text-[#F6FFDF] hover:text-[#D8FF85]  transition-colors flex items-center gap-2"
                                 >
                                     <UserCheck className="w-4 h-4 text-[#F6FFDF]/80" />

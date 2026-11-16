@@ -3,6 +3,7 @@ import { LogOut } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
+import { getTokenClient } from '@/lib/getTokenClient';
 
 /** Same toast styling the login page uses. */
 const TOAST_STYLE = {
@@ -31,8 +32,14 @@ const LeaveEvent = ({
     const router = useRouter();
 
     const handleLeaveEvent = async () => {
+
+        const token = await getTokenClient()
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/join-event/${joinId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                authorization: `Bearer ${token}`
+            }
         });
 
         if (!res.ok) {

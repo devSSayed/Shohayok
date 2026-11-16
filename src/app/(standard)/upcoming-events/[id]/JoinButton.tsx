@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { EventItem } from '../eventHelpers';
 import { authClient } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
+import { getTokenClient } from '@/lib/getTokenClient';
 
 /** Same toast styling the login page uses. */
 const TOAST_STYLE = {
@@ -16,9 +17,16 @@ const TOAST_STYLE = {
 const JoinButton = ({ eventData }: { eventData: EventItem }) => {
     const router = useRouter();
 
-    const { data: session } = authClient.useSession();
+    const { data: session, isPending } = authClient.useSession();
 
     const handleJoin = async () => {
+
+         if (!session) {
+            router.push("/login");
+            return;
+        }
+
+
         const { _id, ...restEventData } = eventData;
 
         const joinedEventData = {
@@ -31,10 +39,13 @@ const JoinButton = ({ eventData }: { eventData: EventItem }) => {
             },
         };
 
+        const token = await getTokenClient()
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/join-event`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization: `Bearer ${token}`
             },
             body: JSON.stringify(joinedEventData)
         })

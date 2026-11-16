@@ -4,6 +4,7 @@ import { headers } from 'next/headers';
 import EventCard from '../upcoming-events/EventCard';
 import { isUpcoming, type EventItem } from '../upcoming-events/eventHelpers';
 import EventsEmptyState from '@/components/EventsEmptyState';
+import { getTokenServer } from '@/lib/getTokenServer';
 
 const ManageEventsPage = () => {
     return (
@@ -72,7 +73,15 @@ const MyEventsGrid = async () => {
     let myEvents: EventItem[] = [];
 
     if (email) {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/myEvents/${email}`);
+
+
+        const token = await getTokenServer()
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/myEvents/${email}`, {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        });
         const data = res.ok ? await res.json() : [];
 
         if (Array.isArray(data)) {

@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 import navLogo from '@/assets/logo.svg';
 import avatar from '@/assets/ProfileAvatar.jpg';
 import NavButton from './NavButton';
@@ -39,6 +40,16 @@ const Navbar = ({ variant = 'solid' }: NavbarProps) => {
 
     const isTransparent = variant === 'transparent';
 
+    /** True once the page has scrolled — the transparent (homepage) variant pins itself then. */
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 0);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
     const { data, isPending } = authClient.useSession();
 
     const user = data?.user;
@@ -60,8 +71,10 @@ const Navbar = ({ variant = 'solid' }: NavbarProps) => {
     return (
         <header
             className={`w-full py-5 px-4 md:px-8 z-50 transition-all ${isTransparent
-                ? 'absolute top-0 left-0 right-0 bg-transparent'
-                : 'relative bg-[#003006]'
+                ? scrolled
+                    ? 'fixed top-0 left-0 right-0 bg-[#003006]'
+                    : 'absolute top-0 left-0 right-0 bg-transparent'
+                : 'sticky top-0 bg-[#003006]'
                 }`}
         >
             {

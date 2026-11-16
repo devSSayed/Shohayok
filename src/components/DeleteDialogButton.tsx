@@ -17,13 +17,20 @@ import { Trash } from 'lucide-react';
 import { EventItem } from '@/app/(standard)/upcoming-events/eventHelpers';
 import toast from "react-hot-toast";
 import { redirect } from 'next/navigation';
+import { getTokenClient } from "@/lib/getTokenClient";
 
 
 const DeleteDialogButton = ({ event }: { event: EventItem }) => {
 
     const handleDeleteEvent = async () => {
+
+        const token = await getTokenClient()
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/event/${event._id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers:{
+                authorization: `Bearer ${token}`
+            }
         })
 
         if (!res.ok) {

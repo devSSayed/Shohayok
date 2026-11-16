@@ -49,6 +49,7 @@ const EventDetail = async ({
 }: Pick<PageProps<'/upcoming-events/[id]'>, 'params'>) => {
     const { id } = await params;
 
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/event/${id}`);
 
     if (!res.ok) {
@@ -70,7 +71,16 @@ const EventDetail = async ({
     let joinId: string | null = null;
 
     if (viewerEmail && !isCreator) {
-        const joinRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/join-event/${viewerEmail}`);
+        /* Backend requires the JWT on this endpoint — same pattern as joined-events. */
+        const jwtToken = await auth.api.getToken({
+            headers: await headers(),
+        });
+
+        const joinRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/join-event/${viewerEmail}`, {
+            headers: {
+                authorization: `Bearer ${jwtToken?.token}`,
+            },
+        });
         const joinData = joinRes.ok ? await joinRes.json() : [];
 
         if (Array.isArray(joinData)) {

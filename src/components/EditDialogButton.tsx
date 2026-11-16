@@ -37,6 +37,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { authClient } from '@/lib/auth-client';
 import { type EventItem, toDateInputValue } from '@/app/(standard)/upcoming-events/eventHelpers';
 import { FaRegCheckCircle } from "react-icons/fa";
+import { getTokenClient } from "@/lib/getTokenClient";
 
 const EVENT_TYPES = [
     'Donation',
@@ -145,10 +146,13 @@ const EditDialougeButton = ({ event }: { event: EventItem }) => {
 
         console.log(eventData);
 
+        const token = await getTokenClient()
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/event/${event._id}`, {
             method: "PATCH",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization: `Bearer ${token}`
             },
             body: JSON.stringify(eventData)
         })

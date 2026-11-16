@@ -22,7 +22,18 @@ const JoinedEventsPage = async () => {
     let joined: EventItem[] = [];
 
     if (email) {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/join-event/${email}`);
+
+        const jwtToken = await auth.api.getToken({
+            headers: await headers()
+        })
+
+        const token = jwtToken?.token
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/join-event/${email}`, {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        });
         const data = res.ok ? await res.json() : [];
 
         if (Array.isArray(data)) {
